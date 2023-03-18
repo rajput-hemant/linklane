@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import * as SeparatorPrimitive from "@radix-ui/react-separator"
+import React from "react";
+import * as SeparatorPrimitive from "@radix-ui/react-separator";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const Separator = React.forwardRef<
   React.ElementRef<typeof SeparatorPrimitive.Root>,
@@ -18,14 +18,15 @@ const Separator = React.forwardRef<
       decorative={decorative}
       orientation={orientation}
       className={cn(
-        "bg-slate-200 dark:bg-slate-700",
+        "bg-slate-300 dark:bg-zinc-600",
         orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
         className
       )}
       {...props}
     />
   )
-)
-Separator.displayName = SeparatorPrimitive.Root.displayName
+);
 
-export { Separator }
+Separator.displayName = SeparatorPrimitive.Root.displayName;
+
+export { Separator };

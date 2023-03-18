@@ -1,14 +1,20 @@
-import { SiteHeader } from "@/components/site-header"
+import { ThemeProvider } from "next-themes";
+
+import SiteHeader from "@/components/navbar/site-header";
+import { Toaster } from "./ui/toaster";
 
 interface LayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function Layout({ children }: LayoutProps) {
   return (
     <>
-      <SiteHeader />
-      <main>{children}</main>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <SiteHeader />
+        <main>{children}</main>
+        <Toaster />
+      </ThemeProvider>
     </>
-  )
+  );
 }

@@ -1,15 +1,15 @@
-import type { AppProps } from "next/app"
-import { Inter as FontSans } from "next/font/google"
-import { ThemeProvider } from "next-themes"
+import type { AppProps } from "next/app";
+import { Inter as FontSans } from "next/font/google";
+import { SessionProvider } from "next-auth/react";
 
-import "@/styles/globals.css"
-import { Layout } from "@/components/layout"
+import "@/styles/globals.css";
+import { Layout } from "@/components/layout";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
-})
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -19,11 +19,12 @@ export default function App({ Component, pageProps }: AppProps) {
           --font-sans: ${fontSans.style.fontFamily};
         }
       `}</style>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+
+      <SessionProvider session={pageProps.session}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </ThemeProvider>
+      </SessionProvider>
     </>
-  )
+  );
 }

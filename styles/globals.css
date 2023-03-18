@@ -2,14 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-::-webkit-scrollbar {
-  @apply w-1 h-1 bg-slate-700;
+@layer components {
+  .card {
+    @apply bg-white p-10 rounded-lg shadow-lg dark:shadow-none border dark:bg-grey-700 dark:text-white dark:border-zinc-700 dark:shadow-zinc-700;
+  }
 }
 
-::-webkit-scrollbar-track {
-  @apply rounded-xl bg-slate-700;
+::-webkit-scrollbar {
+  @apply w-1 h-1 bg-transparent;
 }
+
+/* ::-webkit-scrollbar-track {
+} */
 
 ::-webkit-scrollbar-thumb {
-  @apply rounded-xl bg-slate-500 hover:w-2 hover:bg-slate-400;
+  @apply rounded-xl hover:bg-slate-500 hover:w-2 bg-slate-400 dark:bg-slate-500  dark:hover:bg-slate-400;
 }
