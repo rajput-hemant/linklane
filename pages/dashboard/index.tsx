@@ -3,20 +3,28 @@ import Head from "next/head";
 import { Plus } from "lucide-react";
 import { useSession } from "next-auth/react";
 
-
-
 import { Icons } from "@/components/icons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/seperator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import Sidebar from "./sidebar";
-
 
 interface Project {
   name: string;
@@ -185,7 +193,9 @@ const Projects = () => {
             <div className="flex gap-2 py-5">
               <HoverCard>
                 <HoverCardTrigger asChild>
-                  <Button className="border-2 border-blue-400 bg-transparent text-blue-500 dark:text-blue-500">Description</Button>
+                  <Button className="border-2 border-blue-400 bg-transparent text-blue-500 dark:text-blue-500">
+                    Description
+                  </Button>
                 </HoverCardTrigger>
                 <HoverCardContent className="w-80">
                   <div className="inline-block  justify-between px-2">
@@ -197,7 +207,9 @@ const Projects = () => {
               <Separator orientation="vertical" />
               <HoverCard>
                 <HoverCardTrigger asChild>
-                  <Button className="border-2 border-blue-400 bg-transparent text-blue-500 dark:text-blue-500">Tech Stack</Button>
+                  <Button className="border-2 border-blue-400 bg-transparent text-blue-500 dark:text-blue-500">
+                    Tech Stack
+                  </Button>
                 </HoverCardTrigger>
                 <HoverCardContent className="w-80">
                   <div className="inline-block  justify-between px-2">
@@ -252,10 +264,10 @@ const AddProject = ({
   return (
     <Dialog>
       <DialogTrigger>
-        <Button className='bg-indigo-900 dark:bg-indigo-800 dark:text-white'>
-          <Plus/>
+        <Button className="bg-indigo-900 dark:bg-indigo-800 dark:text-white">
+          <Plus />
           Add Projects
-        </Button>{" "}
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -304,7 +316,7 @@ const AddProject = ({
             <Textarea
               id="username"
               ref={descriptionRef}
-              placeholder="Add Project Description"
+              placeholder="Add Project escription"
               className="col-span-3"
             />
           </div>
@@ -319,6 +331,104 @@ const AddProject = ({
   );
 };
 
+const AddEvent = () =>
+  // {
+  //   events,
+  //   addEvent,
+  // }: {
+  //   events: any;
+  //   addEvent: (
+  //     name: string,
+  //     description: string,
+  //     github: string,
+  //     techStack: string
+  //   ) => void;
+  // }
+  {
+    const nameRef = React.useRef<HTMLInputElement>(null);
+    const descriptionRef = React.useRef<HTMLTextAreaElement>(null);
+    const techStackRef = React.useRef<HTMLInputElement>(null);
+    const githubLinkRef = React.useRef<HTMLInputElement>(null);
+
+    const handleSubmit = () => {
+      const name = nameRef.current?.value!;
+      const description = descriptionRef.current?.value!;
+      const techStack = techStackRef.current?.value!;
+      const github = githubLinkRef.current?.value!;
+
+      // addEvent(name, description, github, techStack);
+    };
+
+    return (
+      <Dialog>
+        <DialogTrigger>
+          <Button className="bg-indigo-900 dark:bg-indigo-800 dark:text-white">
+            <Plus />
+            Add Event
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Add New Event</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="name" className="text-right">
+                Name
+              </Label>
+              <Input
+                id="name"
+                ref={nameRef}
+                placeholder="Add Project Name"
+                className="col-span-3"
+              />
+            </div>
+            {/* github link */}
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="name" className="text-right">
+                Github Link
+              </Label>
+              <Input
+                id="name"
+                ref={githubLinkRef}
+                placeholder="Project Link"
+                className="col-span-3"
+              />
+            </div>
+            {/* tech stack */}
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="username" className="text-right">
+                Tech Stack
+              </Label>
+              <Input
+                id="username"
+                ref={techStackRef}
+                placeholder="Enter the Tech Stack"
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="username" className="text-right">
+                Description
+              </Label>
+              <Textarea
+                id="username"
+                ref={descriptionRef}
+                placeholder="Add Project escription"
+                className="col-span-3"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button onClick={handleSubmit} type="submit">
+              Add Project
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    );
+  };
+
 const Chat = () => {
   return (
     <div className="px-1 lg:px-5">
@@ -328,34 +438,25 @@ const Chat = () => {
           <span className="font-bold">Create Room</span>
         </Button>
       </div>
-      <div className="my-2 grid h-96 grid-cols-2 flex-col gap-x-4 overflow-y-scroll rounded-md p-2 shadow-inner md:flex">
-        {Array.from({ length: 5 }).map((_, i) => (
+      <div className="my-2 grid h-[76.2vh] grid-cols-2 flex-col gap-x-4 overflow-y-scroll rounded-md p-3 shadow-inner md:flex">
+        {Array.from({ length: 10 }).map((_, i) => (
           <div
             key={i}
             className="card my-2 flex flex-col items-center gap-5 p-4 md:w-full md:flex-row md:py-0 md:px-5"
           >
-            <Avatar className="h-10 w-10">
-              <AvatarImage className="h-10 w-10"></AvatarImage>
+            <Avatar className="h-14 w-14">
+              <AvatarImage className="h-16 w-16"></AvatarImage>
               <AvatarFallback>HR</AvatarFallback>
             </Avatar>
             <div className="flex w-full flex-col items-center justify-between md:flex-row">
-              <div className="md:w-full md:pl-5">Development</div>
               <div className="flex w-full flex-col items-center justify-between md:flex-row">
-                <div className="flex flex-col items-center py-5">
-                  <h4>Name</h4>
-                  <h5>Position</h5>
+                <div className="ml-3 flex flex-col py-5">
+                  <h4 className="text-xl font-bold">GLA-Thon Hackathon</h4>
+                  <h5 className="text-lg font-normal">Date & Time</h5>
                 </div>
-                <Button variant="subtle">Join</Button>
+                <Button className="text-lg font-semibold">Join Now</Button>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <h3 className="my-2 text-lg font-bold">Suggestions for you</h3>
-      <div className="flex w-[88vw] gap-2 overflow-x-scroll p-2 shadow-inner md:w-[55vw]">
-        {Array.from({ length: 50 }).map((_, i) => (
-          <div key={1} className="card h-72">
-            <div className="w-44"></div>
           </div>
         ))}
       </div>
@@ -365,8 +466,62 @@ const Chat = () => {
 
 const Events = () => {
   return (
-    <div>
-      <h1>Events</h1>
+    <div className="px-1 lg:px-5">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">Trending Events</h1>
+        <AddEvent />
+      </div>
+      <div className="my-2 grid h-[22.5rem] grid-cols-2 flex-col gap-x-4 overflow-y-scroll rounded-md p-3 shadow-inner md:flex">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div
+            key={i}
+            className="card my-2 flex flex-col items-center gap-5 p-4 md:w-full md:flex-row md:py-0 md:px-5"
+          >
+            <Avatar className="h-14 w-14">
+              <AvatarImage className="h-16 w-16"></AvatarImage>
+              <AvatarFallback>HR</AvatarFallback>
+            </Avatar>
+            <div className="flex w-full flex-col items-center justify-between md:flex-row">
+              <div className="flex w-full flex-col items-center justify-between md:flex-row">
+                <div className="ml-3 flex flex-col py-5">
+                  <h4 className="text-xl font-bold">GLA-Thon Hackathon</h4>
+                  <h5 className="text-lg font-normal">Date & Time</h5>
+                </div>
+                <Button
+                  variant="subtle"
+                  className="bg-black px-5 py-6 text-lg font-semibold"
+                >
+                  Join Now
+                </Button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <h3 className="my-2 text-xl font-bold">Jobs & Internships</h3>
+      <div className="flex w-[88vw] gap-2 overflow-x-scroll p-2 pt-10 shadow-inner md:w-[55vw]">
+        {Array.from({ length: 50 }).map((_, i) => (
+          <div key={1} className="card h-72">
+            <div className="w-44">
+              <div className="relative flex flex-col items-center justify-start">
+                <Avatar className="absolute -top-20 h-20 w-20 bg-gray-800">
+                  <AvatarImage className="h-20 w-20"></AvatarImage>
+                  <AvatarFallback>HR</AvatarFallback>
+                </Avatar>
+              </div>
+              <div className="py-6 text-center">
+                <h4 className="font-semibold">
+                  Internship Opportunity at phillips
+                </h4>
+                <h4 className="py-6 font-bold">Offline</h4>
+                <Button className="pt-3 text-lg font-semibold">
+                  Visit Now
+                </Button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
